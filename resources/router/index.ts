@@ -8,22 +8,22 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: "/",
+            path: "/v/home",
             name: "home",
             component: Home,
         },
         {
-            path: "/profile",
+            path: "/v/profile",
             name: "profile",
             component: Profile,
         },
         {
-            path: "/search",
+            path: "/v/search",
             name: "search",
             component: Search,
         },
         {
-            path: "/weather",
+            path: "/v/weather",
             name: "weather",
             component: Weather,
         },
