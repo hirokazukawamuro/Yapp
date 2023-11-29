@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfileController extends Controller
 {
@@ -19,6 +21,27 @@ class ProfileController extends Controller
         $user = \App\Models\User::find($user->id);
         $user->name = $request->input('name');
         $user->profile = $request->input('profile');
+
+        if ($request->hasFile('image_1')) {
+            $request->validate([
+                'image_1' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $original = $request->file('image_1')->getClientOriginalName();
+            $name = date('Ymd_His') . '_' . $original;
+            $request->file('image_1')->move('storage/images', $name);
+            $user->image_1 = $name;
+        }
+
+        if ($request->hasFile('image_2')) {
+            $request->validate([
+                'image_2' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $original = $request->file('image_2')->getClientOriginalName();
+            $name2 = date('Ymd_His') . '_' . $original;
+            $request->file('image_2')->move('storage/images', $name2);
+            $user->image_2 = $name2;
+        }
+
         $user->save();
 
         return response()->json('Profile is successfully updated!');
