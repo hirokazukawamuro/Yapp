@@ -17,13 +17,14 @@ return new class extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        // Schema::table('posts', function (Blueprint $table) {
-        //     $table->dropColumn('image');
-        // });
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('image');
+        });
     }
 };

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile')->nullable();
-            $table->integer('follower')->nullable();
-            $table->integer('followed')->nullable();
+            $table->string('image_1')->nullable();
+            $table->string('image_2')->nullable();
         });
     }
 
@@ -23,10 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('profile');
-            $table->dropColumn('follower');
-            $table->dropColumn('followed');
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->dropColumn('profile');
+        //     $table->dropColumn('follower');
+        //     $table->dropColumn('followed');
+        // });
     }
 };

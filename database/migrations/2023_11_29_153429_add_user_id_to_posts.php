@@ -9,21 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    // マイグレーションファイル内
+    // マイグレーションファイル内
+    public function up()
     {
-
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('image')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
+
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        // Schema::table('posts', function (Blueprint $table) {
-        //     $table->dropColumn('image');
-        // });
+        Schema::table('posts', function (Blueprint $table) {
+            //
+        });
     }
 };

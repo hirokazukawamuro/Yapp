@@ -13,9 +13,9 @@ class RemoveFollowerAndFollowedColumnsFromUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['follower', 'followed']);
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->dropColumn(['follower', 'followed']);
+        // });
     }
 
     /**
