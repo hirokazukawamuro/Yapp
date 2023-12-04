@@ -17,7 +17,7 @@
     <input type="email" name="email" id="email">
     <label for="password">パスワード</label>
     <input type="password" name="password" id="password">
-    <button type="submit" class="btn btn-ghost bg-pink">送信</button>
+    <button type="submit" class="btn btn-ghost bg-pink">ログイン</button>
 
   </form>
   <a href="/register" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>

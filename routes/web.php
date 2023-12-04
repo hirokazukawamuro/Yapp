@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     })->where('any', '.*');
     Route::post('/send', [App\Http\Controllers\PostController::class, 'send'])->name('send');
     Route::get('/timeline', [App\Http\Controllers\PostController::class, 'fetchMessages'])->name('fetchMessages');
+    Route::get('/my_timeline', [App\Http\Controllers\PostController::class, 'fetchAuthUserMessages'])->name('fetchAuthUserMessages');
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile'])->name('showProfile');
     Route::post('/update', [App\Http\Controllers\ProfileController::class, 'updateProfile'])->name('updateProfile');
 });

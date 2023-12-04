@@ -32,10 +32,12 @@ const fileSelected = (event) => {
 <template>
   <div class="parent">
     <div class="menu bg-w-56 w-56 rounded-box">
-      <router-link to="/v/home" class="btn btn-ghost"><img src="../../img/home.svg" />ホーム</router-link>
-      <router-link to="/v/search" class="btn btn-ghost"><img src="../../img/search.svg" />検索</router-link>
-      <router-link to="/v/profile" class="btn btn-ghost"><img src="../../img/profile.svg" />プロフィール</router-link>
-      <router-link to="/v/weather" class="btn btn-ghost"><img src="../../img/weather.svg" />天気</router-link>
+      <router-link to="/v/home" class="btn btn-ghost"><img src="../../img/home.svg" class="sidebar" />ホーム</router-link>
+      <router-link to="/v/search" class="btn btn-ghost"><img src="../../img/search.svg" class="sidebar" />検索</router-link>
+      <router-link to="/v/profile" class="btn btn-ghost"><img src="../../img/profile.svg"
+          class="sidebar" />プロフィール</router-link>
+      <router-link to="/v/weather" class="btn btn-ghost"><img src="../../img/weather.svg"
+          class="sidebar" />天気</router-link>
 
       <button class="btn btn-ghost bg-pink" onclick="my_modal_2.showModal()">
         ポスト
@@ -65,6 +67,11 @@ const fileSelected = (event) => {
   </div>
 </template>
 <style>
+.sidebar {
+  width: 50px;
+  height: 50px;
+}
+
 .parent {
   display: flex;
   flex-wrap: wrap;

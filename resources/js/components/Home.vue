@@ -43,7 +43,11 @@ button:focus {
     <ul v-if="posts">
       <li v-for="post in posts" :key="post.id">
         <p>{{ post.post }}</p>
-        <img v-if="post.image" v-bind:src="'/storage/images/' + post.image" alt="Image" />
+        <b> {{ post.username }}</b>
+        <div class="profile-icon">
+          <img v-if="post.user_image" v-bind:src="'/storage/images/' + post.user_image" alt="Image" />
+        </div>
+        <img v-if="post.post_image" v-bind:src="'/storage/images/' + post.post_image" alt="Image" />
         <button @click="toggleHeart" :class="{ 'text-red-500': isLiked }">
           <i class="fad fa-heart fa-2x"></i>
         </button>
@@ -54,3 +58,16 @@ button:focus {
     </ul>
   </div>
 </template>
+
+<style scoped>
+.profile-icon img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+li {
+  border-bottom: 1px solid rgb(246, 169, 233);
+}
+</style>
