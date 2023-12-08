@@ -51,6 +51,7 @@ button:focus {
         <button @click="toggleHeart" :class="{ 'text-red-500': isLiked }">
           <i class="fad fa-heart fa-2x"></i>
         </button>
+        <router-link to="/v/others" class="btn btn-ghost">フォロー</router-link>
       </li>
     </ul>
     <ul v-else>

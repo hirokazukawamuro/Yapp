@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -48,5 +49,12 @@ class UserController extends Controller
         Auth::logout();
 
         return redirect('/');
+    }
+
+    public function fetchUsers(Request $request)
+    {
+        $users = DB::table('users')->get();
+
+        return response()->json(['users' => $users]);
     }
 }

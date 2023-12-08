@@ -48,7 +48,7 @@ class PostController extends Controller
 
     public function fetchAuthUserMessages(Request $request)
     {
-        // ログインユーザーのIDを取得
+
         $userId = Auth::id();
 
         $posts = Post::with('user:name,image_1')
