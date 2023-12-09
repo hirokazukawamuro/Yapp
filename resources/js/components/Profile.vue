@@ -8,6 +8,8 @@ const profile = ref("");
 const image_1 = ref("");
 const image_2 = ref("");
 const posts = ref([]);
+const followings_number = ref();
+const followed_number = ref();
 
 const showProfile = () => {
   axios
@@ -63,9 +65,34 @@ const fetchAuthUserMessages = () => {
       console.error("メッセージの取得中にエラーが発生しました：", error);
     });
 };
+
+const CountFollowings = () => {
+  axios
+    .get("/follow/followings_number")
+    .then((response) => {
+      followings_number.value = response.data.followings_number;
+    })
+    .catch((error) => {
+      console.error("Cannot get the number", error);
+    });
+};
+
+const CountFollowed = () => {
+  axios
+    .get("/follow/followed_number")
+    .then((response) => {
+      followed_number.value = response.data.followed_number;
+    })
+    .catch((error) => {
+      console.error("Cannot get the number", error);
+    });
+};
+
 onMounted(() => {
   showProfile();
   fetchAuthUserMessages();
+  CountFollowings();
+  CountFollowed();
 });
 </script>
 
@@ -110,6 +137,9 @@ onMounted(() => {
         </dialog>
 
         <p v-if="profile !== null">{{ user.profile }}</p>
+
+        <p>{{ followings_number }} フォロー中</p>
+        <p>{{ followed_number }} フォロワー</p>
       </div>
     </div>
     <div v-else>

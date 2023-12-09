@@ -27,9 +27,9 @@ const store = (followeeId) => {
     });
 };
 
-const destroy = (id) => {
+const destroy = (followeeId) => {
   axios
-    .post("/follow/{id}/destroy")
+    .post("/follow/destroy", { followee_id: followeeId })
     .then((response) => {
       console.log(response);
     })

@@ -15,12 +15,6 @@
 </head>
 
 <body class="antialiased">
-  <header>
-    <form action="{{route('user.logout')}}" method="post">
-      @csrf
-      <button class="btn btn-ghost bg-pink">ログアウト</button>
-    </form>
-  </header>
   <div id="app"></div>
 
 

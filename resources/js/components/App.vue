@@ -32,6 +32,7 @@ const fileSelected = (event) => {
 <template>
   <div class="parent">
     <div class="menu bg-w-56 w-56 rounded-box">
+      <router-link to="/v/home" class="btn btn-ghost"><img src="../../img/aicon-1.png" class="sidebar" /></router-link>
       <router-link to="/v/home" class="btn btn-ghost"><img src="../../img/home.svg" class="sidebar" />ホーム</router-link>
       <router-link to="/v/search" class="btn btn-ghost"><img src="../../img/search.svg" class="sidebar" />検索</router-link>
       <router-link to="/v/profile" class="btn btn-ghost"><img src="../../img/profile.svg"
@@ -42,6 +43,8 @@ const fileSelected = (event) => {
       <button class="btn btn-ghost bg-pink" onclick="my_modal_2.showModal()">
         ポスト
       </button>
+
+      <a href="/">ログインユーザの名前とアイコン(ログアウト)</a>
       <dialog id="my_modal_2" class="modal">
         <div class="modal-box">
           <input type="text" name="message" placeholder="いいたいことはあるか？" v-model="message" class="input"
