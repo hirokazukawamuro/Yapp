@@ -41,5 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/follow/destroy', [App\Http\Controllers\FollowController::class, 'destroy'])->name('destroy');
     Route::get('/follow/followings_number', [App\Http\Controllers\FollowController::class, 'CountFollowings'])->name('CountFollowings');
     Route::get('/follow/followed_number', [App\Http\Controllers\FollowController::class, 'CountFollowed'])->name('CountFollowed');
+    Route::post('/like', [App\Http\Controllers\LikeController::class, 'like'])->name('like');
     Route::get('/allusers', [App\Http\Controllers\UserController::class, 'fetchUsers'])->name('fetchUsers');
 });

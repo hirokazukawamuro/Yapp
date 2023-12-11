@@ -38,7 +38,7 @@ class PostController extends Controller
     public function fetchMessages(Request $request)
     {
         $posts = Post::with('user:name,image_1')
-            ->select('posts.post', 'posts.image as post_image', 'users.name as username', 'users.image_1 as user_image')
+            ->select('posts.id', 'posts.post', 'posts.image as post_image', 'users.name as username', 'users.image_1 as user_image')
             ->join('users', 'posts.user_id', '=', 'users.id')
             ->orderBy('posts.created_at', 'desc')
             ->get();

@@ -15,43 +15,45 @@ const fetchMessages = () => {
       console.error("メッセージの取得中にエラーが発生しました：", error);
     });
 };
-const isLiked = ref(false);
-
-const toggleHeart = () => {
-  isLiked.value = !isLiked.value;
+const like = (postId) => {
+  console.log("postId:", postId);
+  axios
+    .post("/like", { post_id: postId })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error("いいねできず", error);
+    });
 };
 
 onMounted(fetchMessages);
 </script>
-<style scoped>
-/* Scoped styles for the Heart component */
-button {
-  transition: color 0.3s ease;
-  /* カラーの変化をスムーズにするためのトランジション */
-}
 
-/* ボタンが押された時のスタイル */
-button:active,
-button:focus {
-  outline: none;
-  /* ボタンがフォーカスされたときのアウトラインを非表示にする */
-}
-</style>
 <template>
   <div>
     <h1>タイムライン</h1>
     <ul v-if="posts">
       <li v-for="post in posts" :key="post.id">
         <p>{{ post.post }}</p>
-        <b> {{ post.username }}</b>
-        <div class="profile-icon">
-          <img v-if="post.user_image" v-bind:src="'/storage/images/' + post.user_image" alt="Image" />
-        </div>
+        <router-link to="/v/others" class="btn btn-ghost">{{ post.username }}
+          <div class="profile-icon">
+            <img v-if="post.user_image" v-bind:src="'/storage/images/' + post.user_image" alt="Image" />
+          </div>
+        </router-link>
         <img v-if="post.post_image" v-bind:src="'/storage/images/' + post.post_image" alt="Image" />
-        <button @click="toggleHeart" :class="{ 'text-red-500': isLiked }">
-          <i class="fad fa-heart fa-2x"></i>
-        </button>
-        <router-link to="/v/others" class="btn btn-ghost">フォロー</router-link>
+
+        <label class="swap">
+          <input type="checkbox" @click="like(post.id)" />
+          <div class="swap-on">
+            <img src="../../img/red_heart.svg" class="sidebar" />
+          </div>
+          <div class="swap-off">
+            <img src="../../img/white_heart.svg" class="sidebar" />
+          </div>
+        </label>
+
+        <button class="btn btn-ghost">コメント</button>
       </li>
     </ul>
     <ul v-else>

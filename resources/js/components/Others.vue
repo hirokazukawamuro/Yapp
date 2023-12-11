@@ -12,7 +12,7 @@ const fetchUsers = () => {
       users.value = response.data.users;
     })
     .catch((error) => {
-      console.error("ユーザとれず。。。", error);
+      console.error("ユーザとれず", error);
     });
 };
 
