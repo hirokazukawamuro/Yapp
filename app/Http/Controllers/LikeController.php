@@ -12,18 +12,37 @@ class LikeController extends Controller
     public function like(Request $request)
     {
         Log::info('Received post_id:', ['post_id' => $request->post_id]);
-        $like = Like::create([
-            'user_id' => Auth::id(),
-            'post_id' => $request->post_id,
-        ]);
+        $existingLike = Like::where('user_id', Auth::id())
+            ->where('post_id', $request->post_id)
+            ->first();
 
-        return response()->json(['message' => 'Post liked successfully']);
+        if (!$existingLike) {
+            $like = Like::create([
+                'user_id' => Auth::id(),
+                'post_id' => $request->post_id,
+            ]);
+
+            return response()->json(['message' => 'Post liked successfully']);
+        }
+
+        return response()->json(['message' => 'Post already liked']);
     }
 
-    public function destroy(Like $like)
+
+    public function unlike(Request $request)
     {
-        $like->delete();
+        Like::where('user_id', Auth::id())
+            ->where('post_id', $request->post_id)
+            ->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function checkLikeStatus(Request $request)
+    {
+        $liked_posts = Like::where('user_id', Auth::id())
+            ->get();
+
+        return response()->json(['liked_exists' => $liked_posts]);
     }
 }
