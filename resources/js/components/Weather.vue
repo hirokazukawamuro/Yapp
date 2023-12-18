@@ -32,5 +32,8 @@ const getWeather = () => {
     <h1>東京の 1 時間ごとの天気</h1>
 
     <h1>東京の 1週間ごとの天気</h1>
+    <div v-if="weather">
+      <p>{{ weather }}</p>
+    </div>
   </main>
 </template>
