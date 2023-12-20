@@ -68,7 +68,7 @@ const unlike = (postId) => {
   console.log("postId:", postId);
   axios
     .post("/unlike", { post_id: postId })
-    .then((response) => {
+    .then(() => {
       console.log("いいねを解除しました。");
       likedPosts.value = likedPosts.value.filter((id) => id !== postId);
 

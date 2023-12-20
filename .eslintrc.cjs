@@ -1,32 +1,28 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
     "extends": [
-        "standard-with-typescript",
-        "plugin:vue/vue3-essential"
+        "eslint:recommended",
+        "plugin:vue/vue3-essential",
+        "plugin:@typescript-eslint/recommended"
     ],
-    "overrides": [
-        {
-            "env": {
-                "node": true
-            },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
-            }
-        }
-    ],
+    "parser": "vue-eslint-parser",
     "parserOptions": {
+        "parser": "@typescript-eslint/parser",
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
     "plugins": [
-        "vue"
+        "vue",
+        "@typescript-eslint"
     ],
     "rules": {
+        "vue/multi-word-component-names": ["error", {
+            "ignores": ["Home","Search","Weather"]
+          }]
     }
-}
+ }
+ 

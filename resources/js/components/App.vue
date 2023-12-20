@@ -15,7 +15,7 @@ const send = () => {
 
     axios
       .post("/send", formData)
-      .then((response) => {
+      .then(() => {
         message.value = "";
         image.value = null;
       })
