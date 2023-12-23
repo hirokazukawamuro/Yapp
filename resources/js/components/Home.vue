@@ -105,7 +105,7 @@ onMounted(() => {
     <ul v-if="posts">
       <li v-for="post in posts" :key="post.id">
         <p>{{ post.post }}</p>
-        <router-link to="/v/others" class="btn btn-ghost">{{ post.username }}
+        <router-link :to="{ name: 'others', params: { userId: post.user.id } }" class="btn btn-ghost">{{ post.username }}
           <div class="profile-icon">
             <img v-if="post.user_image" v-bind:src="'/storage/images/' + post.user_image" alt="Image" />
           </div>

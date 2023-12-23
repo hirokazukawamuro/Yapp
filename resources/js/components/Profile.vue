@@ -35,7 +35,7 @@ const updateProfile = () => {
   formData.append("profile", profile.value);
   axios
     .post("/update", formData)
-    .then((response) => {
+    .then(() => {
       console.log(image_1.value);
       console.log(image_2.value);
     })
