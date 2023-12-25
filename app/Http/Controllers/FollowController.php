@@ -10,6 +10,7 @@ class FollowController extends Controller
 {
   public function store(Request $request)
   {
+
     $follow = Follow::create([
       'follower_id' => Auth::id(),
       'followee_id' => $request->followee_id,
@@ -28,18 +29,33 @@ class FollowController extends Controller
     return response()->json(['message' => 'UnFollowed successfully']);
   }
 
-
-  public function CountFollowings()
+  public function CountFollowings(Request $request)
   {
-    $followings_number = Follow::where('follower_id', Auth::id())
-      ->count();
+    $userId = $request->has('userId') ? $request->query('userId') : Auth::id();
+
+    $followings_number = Follow::where('follower_id', $userId)->count();
+
     return response()->json(['followings_number' => $followings_number]);
   }
 
-  public function CountFollowed()
+  public function CountFollowed(Request $request)
   {
-    $followed_number = Follow::where('followee_id', Auth::id())
-      ->count();
+    $userId = $request->has('userId') ? $request->query('userId') : Auth::id();
+
+    $followed_number = Follow::where('followee_id', $userId)->count();
+
     return response()->json(['followed_number' => $followed_number]);
+  }
+
+  public function checkFollow(Request $request)
+  {
+    $followerId = Auth::id();
+    $followeeId = $request->input('userId');
+
+    $follow_checked = Follow::where('follower_id', $followerId)
+      ->where('followee_id', $followeeId)
+      ->exists();
+
+    return response()->json(['isFollowing' => $follow_checked]);
   }
 }

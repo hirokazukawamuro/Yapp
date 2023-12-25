@@ -29,9 +29,10 @@ const router = createRouter({
             component: Weather,
         },
         {
-            path: "/v/others",
+            path: "/v/others/:userId",
             name: "others",
             component: Others,
+            props:true,
         },
     ],
 });

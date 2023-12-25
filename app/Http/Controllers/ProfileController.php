@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 
 class ProfileController extends Controller
@@ -15,6 +17,18 @@ class ProfileController extends Controller
         return response()->json(['user' => $user]);
     }
 
+    public function showOthersProfile(Request $request)
+    {
+        $userId = $request->query('userId');
+        $user = User::where('id', $userId)->first();
+
+        if (!$user) {
+            Log::error("ユーザーが存在しません。 ID: {$userId}");
+            return response()->json(['user' => null, 'message' => 'User not found']);
+        }
+
+        return response()->json(['user' => $user]);
+    }
     public function updateProfile(Request $request)
     {
         $user = Auth::user();

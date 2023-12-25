@@ -36,7 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/timeline', [App\Http\Controllers\PostController::class, 'fetchMessages'])->name('fetchMessages');
     Route::get('/my_timeline', [App\Http\Controllers\PostController::class, 'fetchAuthUserMessages'])->name('fetchAuthUserMessages');
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile'])->name('showProfile');
+    Route::get('/others', [App\Http\Controllers\ProfileController::class, 'showOthersProfile'])->name('showOthersProfile');
     Route::post('/update', [App\Http\Controllers\ProfileController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('/follow/check', [App\Http\Controllers\FollowController::class, 'checkFollow'])->name('checkFollow');
     Route::post('/follow', [App\Http\Controllers\FollowController::class, 'store'])->name('store');
     Route::post('/follow/destroy', [App\Http\Controllers\FollowController::class, 'destroy'])->name('destroy');
     Route::get('/follow/followings_number', [App\Http\Controllers\FollowController::class, 'CountFollowings'])->name('CountFollowings');

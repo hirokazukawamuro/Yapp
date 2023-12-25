@@ -105,23 +105,23 @@ onMounted(() => {
     <ul v-if="posts">
       <li v-for="post in posts" :key="post.id">
         <p>{{ post.post }}</p>
-        <router-link :to="{ name: 'others', params: { userId: post.user.id } }" class="btn btn-ghost">{{ post.username }}
+        <router-link :to="{ name: 'others', params: { userId: Number(post.user_id) } }" class="btn btn-ghost">{{
+          post.username }}
           <div class="profile-icon">
             <img v-if="post.user_image" v-bind:src="'/storage/images/' + post.user_image" alt="Image" />
           </div>
         </router-link>
         <img v-if="post.post_image" v-bind:src="'/storage/images/' + post.post_image" alt="Image" />
 
-        <label class="swap">
+        <div class="like">
           <input type="checkbox" @click="toggleLike(post.id)" />
-          <div class="swap-on" v-if="isLiked(post.id)">
+          <div v-if="isLiked(post.id)">
             <img src="../../img/red_heart.svg" class="sidebar" />
           </div>
-          <div class="swap-off" v-else>
+          <div v-else>
             <img src="../../img/white_heart.svg" class="sidebar" />
           </div>
-        </label>
-
+        </div>
         <button class="btn btn-ghost">コメント</button>
       </li>
     </ul>
@@ -141,5 +141,19 @@ onMounted(() => {
 
 li {
   border-bottom: 1px solid rgb(246, 169, 233);
+}
+
+.like {
+  position: relative;
+}
+
+.like input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
 </style>
