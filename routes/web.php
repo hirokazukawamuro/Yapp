@@ -46,6 +46,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/like', [App\Http\Controllers\LikeController::class, 'like'])->name('like');
     Route::post('/unlike', [App\Http\Controllers\LikeController::class, 'unlike'])->name('unlike');
     Route::get('/checkLikeStatus', [App\Http\Controllers\LikeController::class, 'checkLikeStatus'])->name('checkLikeStatus');
+    Route::get('/like/liked_number', [App\Http\Controllers\LikeController::class, 'CountLikes'])->name('CountLikes');
+    Route::post('/repost', [App\Http\Controllers\RepostController::class, 'repost'])->name('repost');
+    Route::post('/undorepost', [App\Http\Controllers\RepostController::class, 'undoRepost'])->name('undoRepost');
+    Route::get('/checkRepostStatus', [App\Http\Controllers\RepostController::class, 'checkRepostStatus'])->name('checkRepostStatus');
+    Route::get('/repost/reposted_number', [App\Http\Controllers\RepostController::class, 'CountReposted'])->name('CountReposted ');
     Route::get('/allusers', [App\Http\Controllers\UserController::class, 'fetchUsers'])->name('fetchUsers');
     Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
 });

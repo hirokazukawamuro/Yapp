@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class LikeController extends Controller
 {
     public function like(Request $request)
     {
-        Log::info('Received post_id:', ['post_id' => $request->post_id]);
         $existingLike = Like::where('user_id', Auth::id())
             ->where('post_id', $request->post_id)
             ->first();
@@ -36,6 +34,13 @@ class LikeController extends Controller
             ->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function CountLikes(Request $request)
+    {
+        $liked_number = Like::where('post_id', $request->post_id)
+            ->count();
+        return response()->json(['liked_number' => $liked_number]);
     }
 
     public function checkLikeStatus(Request $request)
