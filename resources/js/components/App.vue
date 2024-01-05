@@ -69,6 +69,7 @@ const fileSelected = (event) => {
     </div>
   </div>
 </template>
+
 <style>
 .sidebar {
   width: 50px;

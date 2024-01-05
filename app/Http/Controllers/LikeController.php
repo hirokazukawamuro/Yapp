@@ -36,13 +36,6 @@ class LikeController extends Controller
         return response()->json(null, 204);
     }
 
-    public function CountLikes(Request $request)
-    {
-        $liked_number = Like::where('post_id', $request->post_id)
-            ->count();
-        return response()->json(['liked_number' => $liked_number]);
-    }
-
     public function checkLikeStatus(Request $request)
     {
         $liked_posts = Like::where('user_id', Auth::id())

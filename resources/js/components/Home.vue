@@ -161,34 +161,10 @@ const isReposted = (postId) => {
   return false;
 };
 
-const CountLikes = () => {
-  axios
-    .get("/like/liked_number")
-    .then((response) => {
-      liked_number.value = response.data.liked_number;
-    })
-    .catch((error) => {
-      console.error("Cannot get the number", error);
-    });
-};
-
-const CountReposted = () => {
-  axios
-    .get("/repost/reposted_number")
-    .then((response) => {
-      reposted_number.value = response.data.reposted_number;
-    })
-    .catch((error) => {
-      console.error("Cannot get the number", error);
-    });
-};
-
 onMounted(() => {
   fetchMessages();
   checkLikeStatus();
   checkRepostStatus();
-  CountLikes();
-  CountReposted();
 });
 </script>
 
@@ -198,41 +174,35 @@ onMounted(() => {
     <ul v-if="posts">
       <li v-for="post in posts" :key="post.id">
         <p>{{ post.post }}</p>
-        <router-link
-          :to="{ name: 'others', params: { userId: Number(post.user_id) } }"
-          class="btn btn-ghost"
-          >{{ post.username }}
+        <router-link :to="{ name: 'others', params: { userId: Number(post.user_id) } }" class="btn btn-ghost">{{
+          post.username }}
           <div class="profile-icon">
-            <img
-              v-if="post.user_image"
-              v-bind:src="'/storage/images/' + post.user_image"
-              alt="Image"
-            />
+            <img v-if="post.user_image" v-bind:src="'/storage/images/' + post.user_image" alt="Image" />
           </div>
         </router-link>
-        <img
-          v-if="post.post_image"
-          v-bind:src="'/storage/images/' + post.post_image"
-          alt="Image"
-        />
+        <img v-if="post.post_image" v-bind:src="'/storage/images/' + post.post_image" alt="Image" />
 
         <div class="like">
           <input type="checkbox" @click="toggleLike(post.id)" />
           <div v-if="isLiked(post.id)">
-            <img src="../../img/red_heart.svg" class="sidebar" />{{ liked_number }}
+            <img src="../../img/red_heart.svg" class="sidebar" />{{ post.liked_number }}
           </div>
           <div v-else>
-            <img src="../../img/white_heart.svg" class="sidebar" />{{ liked_number }}
+            <img src="../../img/white_heart.svg" class="sidebar" />{{ post.liked_number }}
           </div>
         </div>
 
         <div class="repost">
           <input type="checkbox" @click="toggleRepost(post.id)" />
           <div v-if="isReposted(post.id)">
-            <img src="../../img/green_repost.svg" class="sidebar" /> {{ reposted_number }}
+            <img src="../../img/green_repost.svg" class="sidebar" />{{
+              post.reposted_number
+            }}
           </div>
           <div v-else>
-            <img src="../../img/white_repost.svg" class="sidebar" />{{ reposted_number }}
+            <img src="../../img/white_repost.svg" class="sidebar" />{{
+              post.reposted_number
+            }}
           </div>
         </div>
 

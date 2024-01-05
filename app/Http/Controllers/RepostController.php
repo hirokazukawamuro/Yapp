@@ -36,13 +36,6 @@ class RepostController extends Controller
         return response()->json(null, 204);
     }
 
-    public function CountReposted(Request $request)
-    {
-        $reposted_number = Repost::where('post_id', $request->post_id)
-            ->count();
-        return response()->json(['reposted_number' => $reposted_number]);
-    }
-
     public function checkRepostStatus(Request $request)
     {
         $reposted_posts = Repost::where('user_id', Auth::id())
