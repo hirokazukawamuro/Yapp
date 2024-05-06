@@ -1,10 +1,8 @@
 {
-  "files": [
-    "./resources/js/main.ts"
-  ],
-  
-  "compilerOptions": {
-    "outDir": "dist"
-  },
-  "include": ["resources/**/*"]
+    "files": ["./resources/js/main.ts"],
+
+    "compilerOptions": {
+        "outDir": "dist"
+    },
+    "include": ["resources/**/*"]
 }

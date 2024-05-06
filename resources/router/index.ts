@@ -32,7 +32,7 @@ const router = createRouter({
             path: "/v/others/:userId",
             name: "others",
             component: Others,
-            props:true,
+            props: true,
         },
     ],
 });

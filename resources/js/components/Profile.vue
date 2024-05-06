@@ -101,7 +101,7 @@ onMounted(() => {
     <div v-if="user">
       <div class="profile-zone">
         <div class="background-image">
-          <img v-if="image_2" v-bind:src="'/storage/images/' + image_2" alt="Image 2" />
+          <img v-if="image_2" v-bind:src="'/storage/images/' + image_2" alt="Image 2" class="fixed-size-image" />
         </div>
         <div class="profile-image">
           <img v-if="image_1" v-bind:src="'/storage/images/' + image_1" alt="Image 1" />
@@ -211,4 +211,13 @@ li {
   opacity: 0;
   cursor: pointer;
 } */
+
+.fixed-size-image {
+  width: 600px;
+  /* 画像の幅を固定 */
+  height: 100px;
+  /* 画像の高さを固定 */
+  object-fit: cover;
+  /* 画像がボックスに収まるように調整 */
+}
 </style>
