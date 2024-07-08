@@ -161,6 +161,12 @@ const isReposted = (postId) => {
   return false;
 };
 
+const showModal = (postId) => {
+  const modal = document.getElementById(`comment_modal_${postId}`);
+  if (modal) {
+    (modal as HTMLDialogElement).showModal();
+  }
+};
 onMounted(() => {
   fetchMessages();
   checkLikeStatus();
@@ -170,46 +176,69 @@ onMounted(() => {
 
 <template>
   <div>
-    <h1>タイムライン</h1>
+    <h1 class="mb-10">タイムライン</h1>
     <ul v-if="posts">
-      <li v-for="post in posts" :key="post.id">
-        <p>{{ post.post }}</p>
-        <router-link :to="{ name: 'others', params: { userId: Number(post.user_id) } }" class="btn btn-ghost">{{
-          post.username }}
+      <li v-for="post in posts" :key="post.id" class="mb-10">
+        <router-link :to="{ name: 'others', params: { userId: Number(post.user_id) } }" class="btn btn-ghost">
           <div class="profile-icon">
             <img v-if="post.user_image" v-bind:src="'/storage/images/' + post.user_image" alt="Image" />
           </div>
+          {{ post.username }}
         </router-link>
+        <p>{{ post.post }}</p>
         <img v-if="post.post_image" v-bind:src="'/storage/images/' + post.post_image" alt="Image" />
 
-        <div class="like">
-          <input type="checkbox" @click="toggleLike(post.id)" />
-          <div v-if="isLiked(post.id)">
-            <img src="../../img/red_heart.svg" class="sidebar" />{{ post.liked_number }}
+        <div class="flex justify-between">
+          <div class="comment">
+            <button class="btn" @click="showModal(post.id)">
+              <img src="../../img/comment.svg" class="sidebar" />
+            </button>
+            <dialog :id="'comment_modal_' + post.id" class="modal">
+              <div class="modal-box">
+                <form method="dialog">
+                  <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    ✕
+                  </button>
+                  <div>
+                    <div class="profile-icon">
+                      <img v-if="post.user_image" v-bind:src="'/storage/images/' + post.user_image" alt="Image" />
+                    </div>
+                    {{ post.username }}
+                    <p>{{ post.post }}</p>
+                    <img v-if="post.post_image" v-bind:src="'/storage/images/' + post.post_image" alt="Image" />
+                  </div>
+                  <input type="text" name="message" placeholder="返信しよう" class="input" @keyup.enter="send" />
+                  <input type="file" name="image" accept="image/*" @change="fileSelected" />
+                </form>
+              </div>
+            </dialog>
           </div>
-          <div v-else>
-            <img src="../../img/white_heart.svg" class="sidebar" />{{ post.liked_number }}
-          </div>
-        </div>
 
-        <div class="repost">
-          <input type="checkbox" @click="toggleRepost(post.id)" />
-          <div v-if="isReposted(post.id)">
-            <img src="../../img/green_repost.svg" class="sidebar" />{{
-              post.reposted_number
-            }}
+          <div class="repost">
+            <input type="checkbox" @click="toggleRepost(post.id)" />
+            <div v-if="isReposted(post.id)">
+              <img src="../../img/green_repost.svg" class="sidebar" />{{
+                post.reposted_number
+              }}
+            </div>
+            <div v-else>
+              <img src="../../img/white_repost.svg" class="sidebar" />{{
+                post.reposted_number
+              }}
+            </div>
           </div>
-          <div v-else>
-            <img src="../../img/white_repost.svg" class="sidebar" />{{
-              post.reposted_number
-            }}
-          </div>
-        </div>
 
-        <div class="comment">
-          <button class="btn btn-ghost">
-            <img src="../../img/comment.svg" class="sidebar" />
-          </button>
+          <div class="like flex">
+            <input type="checkbox" @click="toggleLike(post.id)" />
+            <div v-if="isLiked(post.id)">
+              <img src="../../img/red_heart.svg" class="sidebar" />
+              <div>{{ post.liked_number }}</div>
+            </div>
+            <div v-else>
+              <img src="../../img/white_heart.svg" class="sidebar" />
+              <div>{{ post.liked_number }}</div>
+            </div>
+          </div>
         </div>
       </li>
     </ul>
